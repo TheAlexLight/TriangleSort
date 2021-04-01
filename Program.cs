@@ -10,6 +10,14 @@ namespace _3.TriangleSort
     {
         static void Main(string[] args)
         {
+            if (args.Length != 4)
+            {
+                Console.WriteLine("Instruction"); //TODO: Implement instruction
+
+                return;
+            }
+
+
         }
     }
 }
