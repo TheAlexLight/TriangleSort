@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using _3.TriangleSort.Logic;
+using _3.TriangleSort.View;
 
 namespace _3.TriangleSort
 {
@@ -19,23 +20,17 @@ namespace _3.TriangleSort
             //    return;
             //}
 
-            Triangle secondTriangle = new Triangle(1f, 1f, 1f);
-            Triangle firstTriangle = new Triangle(3.2f,5.8f,7.4f);
+            Triangle secondTriangle = new Triangle("FirstTriangle",1f, 1f, 1f);
+            Triangle firstTriangle = new Triangle("SecondTriangle",3.2f,5.8f,7.4f);
             
-
             TriangleSquareSorter sorterOfTriangles = new TriangleSquareSorter();
 
             sorterOfTriangles.AddTriangleIntoAList(firstTriangle);
             sorterOfTriangles.AddTriangleIntoAList(secondTriangle);
 
-            List<Triangle> sortedTriangleList = new List<Triangle>();
+            SortedTriangleViewer showSortedTriangles = new SortedTriangleViewer(sorterOfTriangles);
 
-            sortedTriangleList = sorterOfTriangles.SortTriangles();
-
-            foreach (var triangle in sortedTriangleList)
-            {
-                Console.WriteLine(triangle.Square);
-            }
+            showSortedTriangles.ShowSquares();
 
             Console.ReadKey();
         }

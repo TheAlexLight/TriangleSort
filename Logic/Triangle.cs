@@ -8,8 +8,9 @@ namespace _3.TriangleSort.Logic
 {
     class Triangle
     {
-        public Triangle(float leftSide, float rightSide, float bottomSide)
+        public Triangle(string name, float leftSide, float rightSide, float bottomSide)
         {
+            this.name = name;
             arrayOfSides[0] = leftSide;
             arrayOfSides[1] = rightSide;
             arrayOfSides[2] = bottomSide;
@@ -18,10 +19,12 @@ namespace _3.TriangleSort.Logic
 
         }
 
+        private string name;
         private float[] arrayOfSides = new float[3]; //left, right, bottom
         private float square;
 
         public float Square { get { return square; } }
+        public string Name { get { return name; } }
 
         private void CalculateSquare()
         {

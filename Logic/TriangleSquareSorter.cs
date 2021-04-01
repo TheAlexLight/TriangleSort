@@ -16,6 +16,13 @@ namespace _3.TriangleSort.Logic
         private List<Triangle> listOfTriangles;
 
         public List<Triangle> ListOfTriangles { get { return listOfTriangles; }  }
+        public List<Triangle> SortedTriangleList 
+        { 
+            get 
+            {
+                return SortTriangles();
+            }  
+        }
 
         public void AddTriangleIntoAList(Triangle oneTriangle)
         {
@@ -37,9 +44,6 @@ namespace _3.TriangleSort.Logic
             List<Triangle> sortedList = listOfTriangles.OrderByDescending(o=>o.Square).ToList();
 
             return sortedList;
-
         }
-
-      
     }
 }
