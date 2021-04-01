@@ -21,6 +21,8 @@ namespace _3.TriangleSort.Logic
         private float[] arrayOfSides = new float[3]; //left, right, bottom
         private float square;
 
+        public float Square { get { return square; } }
+
         private void CalculateSquare()
         {
             float halfPerimeter = CalculateSemiPerimeter();
