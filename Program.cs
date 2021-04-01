@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using _3.TriangleSort.Controller;
 using _3.TriangleSort.Logic;
 using _3.TriangleSort.View;
 
@@ -19,6 +20,8 @@ namespace _3.TriangleSort
 
             //    return;
             //}
+
+            TriangleController controller = new TriangleController();
 
             Triangle secondTriangle = new Triangle("FirstTriangle",1f, 1f, 1f);
             Triangle firstTriangle = new Triangle("SecondTriangle",3.2f,5.8f,7.4f);

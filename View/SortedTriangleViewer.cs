@@ -21,7 +21,6 @@ namespace _3.TriangleSort.View
         {
             foreach (var triangle in sortedTriangles.SortedTriangleList)
             {
-                string s = "123";
                 string fullTriangleMessage = string.Format("[{0}]: {1} cm",triangle.Name, triangle.Square);
                 Console.WriteLine(fullTriangleMessage);
             }
