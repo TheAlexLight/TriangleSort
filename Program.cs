@@ -22,9 +22,13 @@ namespace _3.TriangleSort
             //}
 
             TriangleController controller = new TriangleController();
+            TriangleParameters parameters = new TriangleParameters();
 
-            Triangle secondTriangle = new Triangle("FirstTriangle",1f, 1f, 1f);
-            Triangle firstTriangle = new Triangle("SecondTriangle",3.2f,5.8f,7.4f);
+            parameters = controller.CheckTriangleStartData(args[0],args[1],args[2],args[3]);
+
+            Triangle secondTriangle = new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide);
+
+            Triangle firstTriangle = new Triangle("F",3.2f,5.8f,7.4f);
             
             TriangleSquareSorter sorterOfTriangles = new TriangleSquareSorter();
 

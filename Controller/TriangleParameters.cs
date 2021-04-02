@@ -11,49 +11,64 @@ namespace _3.TriangleSort.Controller
     {
         public static int MAX_TRIANGLE_SIDE = 1000000;
 
-       private float leftSide;
-       private float rightSide;
-       private float bottomSide;
+        private string name;
+       private float firstSide;
+       private float secondSide;
+       private float thirdSide;
 
-        public float LeftSide 
+        public float FirstSide 
         {
             get 
             {
-                return leftSide;
+                return firstSide;
             } 
             set
             {
                 if (value > 0 && value <= MAX_TRIANGLE_SIDE)
                 {
-                    leftSide = value;
+                    firstSide = value;
                 }
             } 
         }
-        public float RightSide
+        public float SecondSide
         {
             get
             {
-                return rightSide;
+                return secondSide;
             }
             set
             {
                 if (value > 0 && value <= MAX_TRIANGLE_SIDE)
                 {
-                    rightSide = value;
+                    secondSide = value;
                 }
             }
         }
-        public float BottomSide
+        public float ThirdSide
         {
             get
             {
-                return bottomSide;
+                return thirdSide;
             }
             set
             {
                 if (value > 0 && value <= MAX_TRIANGLE_SIDE)
                 {
-                    bottomSide = value;
+                    thirdSide = value;
+                }
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                if (value.Length < 255 && value.Length > 0)
+                {
+                    name = value;
                 }
             }
         }

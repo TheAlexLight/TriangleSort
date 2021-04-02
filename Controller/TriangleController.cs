@@ -17,20 +17,55 @@ namespace _3.TriangleSort.Controller
         Converter converterArgs = new Converter();
         Validator validArgs = new Validator();
 
-        public TriangleParameters CheckTriangleStartData(string triangleName, string leftSide, string rightSide, string bottomSide)
+        public TriangleParameters CheckTriangleStartData(string triangleName, string firstSide, string secondSide, string thirdSide)
         {
             bool needToCheck = NeedToCheckStartData();
 
-            triangleStartData.LeftSide = CheckTriangleSide(leftSide, needToCheck, Constant.LEFT_SIDE);
-            triangleStartData.RightSide = CheckTriangleSide(rightSide, needToCheck, Constant.RIGHT_SIDE);
-            triangleStartData.BottomSide = CheckTriangleSide(bottomSide, needToCheck, Constant.BOTTOM_SIDE);
+            if (!validArgs.CheckStringLength(triangleName, needToCheck))
+            {
+                triangleName = EnterNewName("name", needToCheck);
+            }
 
-            if (validArgs.IsTriangle(triangleStartData.LeftSide, triangleStartData.RightSide, triangleStartData.BottomSide))
+            triangleStartData.Name = triangleName;
+
+            triangleStartData.FirstSide = CheckTriangleSide(firstSide, needToCheck, Constant.LEFT_SIDE);
+            triangleStartData.SecondSide = CheckTriangleSide(secondSide, needToCheck, Constant.RIGHT_SIDE);
+            triangleStartData.ThirdSide = CheckTriangleSide(thirdSide, needToCheck, Constant.BOTTOM_SIDE);
+
+            if (!validArgs.IsTriangle(triangleStartData.FirstSide, triangleStartData.SecondSide, triangleStartData.ThirdSide))
             {
                 Console.WriteLine("Wrong sides, try again "); // TODO: implement next Triangles;
             }
             
             return triangleStartData;
+        }
+
+        //public TriangleParameters EnterNewTriangle()
+        //{
+        //    Console.WriteLine("Enter name of Triangle and lengths of sides in format: name, firstSide, secondSide, thirdSide"); 
+        //}
+
+        private string EnterNewName(string valueName, bool needToCheck)
+        {
+            bool successFormat = false;
+            string name = "";
+
+            while (!successFormat)
+            {
+                consoleActor.Write(string.Format(Constant.ENTER_PROMPT, valueName));
+                name = consoleActor.ReadLine();
+
+                if (!validArgs.CheckStringLength(name, needToCheck))
+                {
+                    consoleActor.WriteLine(Constant.WRONG_BOUNDARIES);
+                }
+                else
+                {
+                    successFormat = true;
+                }
+            }
+
+            return name;
         }
 
         private float CheckTriangleSide(string side, bool needToCheck, string valueName)

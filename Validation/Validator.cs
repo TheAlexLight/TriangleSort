@@ -10,11 +10,11 @@ namespace _3.TriangleSort.Validation
 {
     class Validator
     {
-        public bool IsTriangle(float leftSide, float rightSide, float bottomSide)
+        public bool IsTriangle(float firstSide, float secondSide, float thirdSide)
         {
-            return ((leftSide + rightSide <= bottomSide) 
-                    && (bottomSide + rightSide <= leftSide) 
-                    && (bottomSide + leftSide <= rightSide));
+            return ((firstSide + secondSide > thirdSide)
+                    && (secondSide + thirdSide > firstSide)
+                    && (firstSide + thirdSide > secondSide));
         }
 
         public bool CheckFloatOnPositive(float floatToCheck, bool needToCheck)
@@ -42,5 +42,41 @@ namespace _3.TriangleSort.Validation
 
             return (intToCheck > 0 && intToCheck <= maxValue);
         }
+
+        public bool CheckStringLength(string name, bool needToCheck)
+        {
+            bool result = false;
+
+            if (needToCheck)
+            {
+                if (string.IsNullOrWhiteSpace(name) || name.Length > 255)
+                {
+                    result = false;
+                }
+                else
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    throw new ArgumentNullException(Constant.ARGUMENT_NULL_EXCEPTION);
+                }
+                else if (name.Length > 255)
+                {
+                    throw new ArgumentOutOfRangeException(Constant.WRONG_BOUNDARIES);
+                }
+                else
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+
     }
 }

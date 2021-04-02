@@ -6,37 +6,36 @@ using System.Threading.Tasks;
 
 namespace _3.TriangleSort.Logic
 {
-    class Triangle
+    class Triangle : Shape
     {
-        public Triangle(string name, float leftSide, float rightSide, float bottomSide)
+        public Triangle(string name, float firstSide, float secondSide, float thirdSide)
         {
             this.name = name;
-            arrayOfSides[0] = leftSide;
-            arrayOfSides[1] = rightSide;
-            arrayOfSides[2] = bottomSide;
+            this.firstSide = firstSide;
+            this.secondSide = secondSide;
+            this.thirdSide = thirdSide;
 
             CalculateSquare();
-
         }
-
-        private string name;
-        private float[] arrayOfSides = new float[3]; //left, right, bottom
-        private float square;
+ 
+        private float firstSide;
+        private float secondSide;
+        private float thirdSide;
 
         public float Square { get { return square; } }
         public string Name { get { return name; } }
 
-        private void CalculateSquare()
+        protected override void CalculateSquare()
         {
             float halfPerimeter = CalculateSemiPerimeter();
 
-            square = (float)Math.Sqrt(halfPerimeter * (halfPerimeter - arrayOfSides[0]) * (halfPerimeter - arrayOfSides[1]) 
-                * (halfPerimeter - arrayOfSides[2]));
+            square = (float)Math.Sqrt(halfPerimeter * (halfPerimeter - firstSide) * (halfPerimeter - secondSide)
+                * (halfPerimeter - thirdSide));
         }
 
         private float CalculateSemiPerimeter()
         {
-            return (arrayOfSides[0] + arrayOfSides[1] + arrayOfSides[2]) / 2.0f;
+            return (firstSide + secondSide + thirdSide) / 2.0f;
         }
     }
 }

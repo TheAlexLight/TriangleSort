@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Controller\TriangleController.cs" />
     <Compile Include="Controller\TriangleParameters.cs" />
+    <Compile Include="Logic\Shape.cs" />
     <Compile Include="Logic\TriangleSquareSorter.cs" />
     <Compile Include="Logic\Triangle.cs" />
     <Compile Include="Program.cs" />

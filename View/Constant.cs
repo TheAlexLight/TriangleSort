@@ -19,6 +19,7 @@ namespace _3.TriangleSort.View
         public const string LEFT_SIDE = "Side 1";
         public const string RIGHT_SIDE = "Side 2";
         public const string BOTTOM_SIDE = "Side 3";
+        public const string ARGUMENT_NULL_EXCEPTION = "ERROR: Wrong data";
 
     }
 }
