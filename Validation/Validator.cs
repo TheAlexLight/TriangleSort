@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using _3.TriangleSort.Controller;
 using _3.TriangleSort.View;
 
@@ -10,6 +12,7 @@ namespace _3.TriangleSort.Validation
 {
     class Validator
     {
+
         public bool IsTriangle(float firstSide, float secondSide, float thirdSide)
         {
             return ((firstSide + secondSide > thirdSide)
@@ -49,7 +52,7 @@ namespace _3.TriangleSort.Validation
 
             if (needToCheck)
             {
-                if (string.IsNullOrWhiteSpace(name) || name.Length > TriangleParameters.MAX_TRIANGLE_SIDE)
+                if (string.IsNullOrWhiteSpace(name) || name.Length > TriangleParameters.MAX_NAME_LENGTH)
                 {
                     result = false;
                 }
