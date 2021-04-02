@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using _3.TriangleSort.Controller;
 using _3.TriangleSort.View;
 
 namespace _3.TriangleSort.Validation
@@ -45,11 +45,11 @@ namespace _3.TriangleSort.Validation
 
         public bool CheckStringLength(string name, bool needToCheck)
         {
-            bool result = false;
+            bool result;
 
             if (needToCheck)
             {
-                if (string.IsNullOrWhiteSpace(name) || name.Length > 255)
+                if (string.IsNullOrWhiteSpace(name) || name.Length > TriangleParameters.MAX_TRIANGLE_SIDE)
                 {
                     result = false;
                 }
@@ -64,7 +64,7 @@ namespace _3.TriangleSort.Validation
                 {
                     throw new ArgumentNullException(Constant.ARGUMENT_NULL_EXCEPTION);
                 }
-                else if (name.Length > 255)
+                else if (name.Length > TriangleParameters.MAX_NAME_LENGTH)
                 {
                     throw new ArgumentOutOfRangeException(Constant.WRONG_BOUNDARIES);
                 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using _3.TriangleSort.Controller;
 using _3.TriangleSort.Logic;
 using _3.TriangleSort.View;
+using ConsolePrinterLibrary;
 
 namespace _3.TriangleSort
 {
@@ -22,18 +23,33 @@ namespace _3.TriangleSort
             //}
 
             TriangleController controller = new TriangleController();
-            TriangleParameters parameters = new TriangleParameters();
+            TriangleParameters parameters;
 
             parameters = controller.CheckTriangleStartData(args[0],args[1],args[2],args[3]);
 
-            Triangle secondTriangle = new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide);
+            //Triangle secondTriangle = new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide);
 
-            Triangle firstTriangle = new Triangle("F",3.2f,5.8f,7.4f);
-            
             TriangleSquareSorter sorterOfTriangles = new TriangleSquareSorter();
 
-            sorterOfTriangles.AddTriangleIntoAList(firstTriangle);
-            sorterOfTriangles.AddTriangleIntoAList(secondTriangle);
+            sorterOfTriangles.AddTriangleIntoAList(new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide));
+
+            bool addOneMoreTriangle = true;
+            ConsolePrinter printer = new ConsolePrinter();
+
+            while (addOneMoreTriangle)
+            {
+                printer.WriteLine(Constant.ADD_NEW_TRIANGLE_PROMPT);
+                string checkAnswer = printer.ReadLine();
+
+                if (!checkAnswer.ToUpper().Equals(Constant.SIMPLE_YES) || checkAnswer.ToUpper().Equals(Constant.YES))
+                {
+                    addOneMoreTriangle = false;
+                    continue;
+                }
+
+               parameters = controller.EnterNewTriangle();
+               sorterOfTriangles.AddTriangleIntoAList(new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide));
+            }
 
             SortedTriangleViewer showSortedTriangles = new SortedTriangleViewer(sorterOfTriangles);
 

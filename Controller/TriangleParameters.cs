@@ -10,8 +10,10 @@ namespace _3.TriangleSort.Controller
     struct TriangleParameters
     {
         public static int MAX_TRIANGLE_SIDE = 1000000;
+        public static int MAX_NAME_LENGTH = 50;
 
-        private string name;
+
+       private string name;
        private float firstSide;
        private float secondSide;
        private float thirdSide;
@@ -66,7 +68,7 @@ namespace _3.TriangleSort.Controller
             }
             set
             {
-                if (value.Length < 255 && value.Length > 0)
+                if (value.Length < MAX_NAME_LENGTH && value.Length > 0)
                 {
                     name = value;
                 }

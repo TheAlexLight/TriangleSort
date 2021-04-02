@@ -13,7 +13,7 @@ namespace _3.TriangleSort.Logic
             listOfTriangles = new List<Triangle>();
         }
 
-        private List<Triangle> listOfTriangles;
+        private readonly List<Triangle> listOfTriangles;
 
         public List<Triangle> ListOfTriangles { get { return listOfTriangles; }  }
         public List<Triangle> SortedTriangleList 

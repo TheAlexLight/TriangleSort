@@ -18,9 +18,9 @@ namespace _3.TriangleSort.Logic
             CalculateSquare();
         }
  
-        private float firstSide;
-        private float secondSide;
-        private float thirdSide;
+        private readonly float firstSide;
+        private readonly float secondSide;
+        private readonly float thirdSide;
 
         public float Square { get { return square; } }
         public string Name { get { return name; } }

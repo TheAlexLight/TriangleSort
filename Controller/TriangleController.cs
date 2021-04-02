@@ -13,9 +13,9 @@ namespace _3.TriangleSort.Controller
     class TriangleController
     {
         TriangleParameters triangleStartData = new TriangleParameters();
-        ConsolePrinter consoleActor = new ConsolePrinter();
-        Converter converterArgs = new Converter();
-        Validator validArgs = new Validator();
+        readonly ConsolePrinter printer = new ConsolePrinter();
+        readonly Converter converterArgs = new Converter();
+        readonly Validator validArgs = new Validator();
 
         public TriangleParameters CheckTriangleStartData(string triangleName, string firstSide, string secondSide, string thirdSide)
         {
@@ -23,27 +23,56 @@ namespace _3.TriangleSort.Controller
 
             if (!validArgs.CheckStringLength(triangleName, needToCheck))
             {
-                triangleName = EnterNewName("name", needToCheck);
+                triangleName = EnterNewName(Constant.NAME, needToCheck);
             }
 
             triangleStartData.Name = triangleName;
 
-            triangleStartData.FirstSide = CheckTriangleSide(firstSide, needToCheck, Constant.LEFT_SIDE);
-            triangleStartData.SecondSide = CheckTriangleSide(secondSide, needToCheck, Constant.RIGHT_SIDE);
-            triangleStartData.ThirdSide = CheckTriangleSide(thirdSide, needToCheck, Constant.BOTTOM_SIDE);
+            triangleStartData.FirstSide = CheckTriangleSide(firstSide, needToCheck, Constant.FIRST_SIDE);
+            triangleStartData.SecondSide = CheckTriangleSide(secondSide, needToCheck, Constant.SECOND_SIDE);
+            triangleStartData.ThirdSide = CheckTriangleSide(thirdSide, needToCheck, Constant.THIRD_SIDE);
 
             if (!validArgs.IsTriangle(triangleStartData.FirstSide, triangleStartData.SecondSide, triangleStartData.ThirdSide))
             {
-                Console.WriteLine("Wrong sides, try again "); // TODO: implement next Triangles;
+                printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+
+                triangleStartData = EnterNewTriangle();
             }
             
             return triangleStartData;
         }
 
-        //public TriangleParameters EnterNewTriangle()
-        //{
-        //    Console.WriteLine("Enter name of Triangle and lengths of sides in format: name, firstSide, secondSide, thirdSide"); 
-        //}
+        public TriangleParameters EnterNewTriangle()
+        {
+            bool isTriangle = false;
+
+            while (!isTriangle)
+            {
+                bool needToCheck = NeedToCheckStartData();
+
+                triangleStartData.Name = EnterNewName(Constant.NAME, needToCheck);
+
+                printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.FIRST_SIDE));
+                triangleStartData.FirstSide = CheckTriangleSide(printer.ReadLine(), needToCheck, Constant.FIRST_SIDE);
+
+                printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.FIRST_SIDE));
+                triangleStartData.FirstSide = CheckTriangleSide(printer.ReadLine(), needToCheck, Constant.SECOND_SIDE);
+
+                printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.FIRST_SIDE));
+                triangleStartData.FirstSide = CheckTriangleSide(printer.ReadLine(), needToCheck, Constant.THIRD_SIDE);
+
+                if (validArgs.IsTriangle(triangleStartData.FirstSide, triangleStartData.SecondSide, triangleStartData.ThirdSide))
+                {
+                    isTriangle = true;
+                }
+                else
+                {
+                    printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+                }
+            }
+
+            return triangleStartData;
+        }
 
         private string EnterNewName(string valueName, bool needToCheck)
         {
@@ -52,12 +81,12 @@ namespace _3.TriangleSort.Controller
 
             while (!successFormat)
             {
-                consoleActor.Write(string.Format(Constant.ENTER_PROMPT, valueName));
-                name = consoleActor.ReadLine();
+                printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
+                name = printer.ReadLine();
 
                 if (!validArgs.CheckStringLength(name, needToCheck))
                 {
-                    consoleActor.WriteLine(Constant.WRONG_BOUNDARIES);
+                    printer.WriteLine(Constant.WRONG_BOUNDARIES);
                 }
                 else
                 {
@@ -83,7 +112,7 @@ namespace _3.TriangleSort.Controller
                     {
                         if (!validArgs.CheckFloatOnPositive(result, TriangleParameters.MAX_TRIANGLE_SIDE, needToCheck))
                         {
-                            consoleActor.WriteLine(Constant.WRONG_BOUNDARIES);
+                            printer.WriteLine(Constant.WRONG_BOUNDARIES);
                         }
                         else
                         {
@@ -92,16 +121,16 @@ namespace _3.TriangleSort.Controller
                     }
                     else
                     {
-                        consoleActor.WriteLine(Constant.FLOAT_WRONG_TYPE);
-                        consoleActor.Write(string.Format(Constant.ENTER_PROMPT, valueName));
+                        printer.WriteLine(Constant.FLOAT_WRONG_TYPE);
+                        printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
 
-                        side = consoleActor.ReadLine();
+                        side = printer.ReadLine();
                     }
                 }
             }
             catch (Exception ex)
             {
-                consoleActor.WriteLine(string.Format("{0}: {1}", Constant.EXCEPTION_OCCURED, ex.Message)); //Complete Exception
+                printer.WriteLine(string.Format("{0}: {1}", Constant.EXCEPTION_OCCURED, ex.Message)); //Complete Exception
             }
 
             return result;
@@ -109,9 +138,9 @@ namespace _3.TriangleSort.Controller
 
         private bool NeedToCheckStartData()
         {
-            consoleActor.Write(Constant.CHECK_ARGS_PROMPT);
+            printer.Write(Constant.CHECK_ARGS_PROMPT);
 
-            string prompt = consoleActor.ReadLine();
+            string prompt = printer.ReadLine();
 
             bool needToCheck = false;
 

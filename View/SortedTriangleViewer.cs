@@ -15,7 +15,7 @@ namespace _3.TriangleSort.View
             this.sortedTriangles = sortedTriangles;
         }
 
-        TriangleSquareSorter sortedTriangles;
+        readonly TriangleSquareSorter sortedTriangles;
 
         public void ShowSquares()
         {

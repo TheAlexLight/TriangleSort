@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3.TriangleSort", "3.TriangleSort.csproj", "{4895025A-9C39-456A-ADFB-8D164BBA36FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftServeProjectsLibrary", "..\Libraries\SoftServeProjectsLibrary\SoftServeProjectsLibrary.csproj", "{90FB2098-D428-438F-9412-27BB88FCA98D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePrinterLibrary", "..\Libraries\SoftServeProjectsLibrary\ConsolePrinterLibrary.csproj", "{D25ABA2E-17E4-413F-88C8-4DEA3E78656D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4895025A-9C39-456A-ADFB-8D164BBA36FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4895025A-9C39-456A-ADFB-8D164BBA36FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4895025A-9C39-456A-ADFB-8D164BBA36FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90FB2098-D428-438F-9412-27BB88FCA98D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90FB2098-D428-438F-9412-27BB88FCA98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90FB2098-D428-438F-9412-27BB88FCA98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90FB2098-D428-438F-9412-27BB88FCA98D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D25ABA2E-17E4-413F-88C8-4DEA3E78656D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D25ABA2E-17E4-413F-88C8-4DEA3E78656D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D25ABA2E-17E4-413F-88C8-4DEA3E78656D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D25ABA2E-17E4-413F-88C8-4DEA3E78656D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
