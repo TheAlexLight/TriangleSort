@@ -24,28 +24,8 @@ namespace _3.TriangleSort
                 }
 
                 TriangleController _controller = new TriangleController();
-                TriangleParameters _parameters;
 
-                _parameters = _controller.CheckTriangleStartData(args[0], args[1], args[2], args[3]);
-
-
-                TriangleSquareSorter sorterOfTriangles = new TriangleSquareSorter();
-
-                sorterOfTriangles.AddTriangleIntoAList(new Triangle(_parameters.Name, _parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide));
-
-                bool needOneMoreTriangle = true;
-                ConsolePrinter printer = new ConsolePrinter();
-
-
-                while (needOneMoreTriangle)
-                {
-                    _parameters = _controller.AddOneMoreTriangle(ref needOneMoreTriangle);
-                    sorterOfTriangles.AddTriangleIntoAList(new Triangle(_parameters.Name, _parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide));
-                }
-
-                SortedTriangleViewer showSortedTriangles = new SortedTriangleViewer(sorterOfTriangles);
-
-                showSortedTriangles.ShowSquares();
+                _controller.ExecuteMainOperations(args[0], args[1], args[2], args[3]);
 
                 Console.ReadKey();
             }

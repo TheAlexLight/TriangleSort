@@ -27,14 +27,16 @@ namespace _3.TriangleSort.Logic
             }  
         }
 
-        public void AddTriangleIntoAList(Triangle oneTriangle)
+        public List<Triangle> AddTriangleIntoAList(Triangle oneTriangle)
         {
             if (oneTriangle == null)
             {
                 throw new ArgumentNullException(Constant.EXCEPTION_NULL_TRIANGLE);
             }
 
-            _listOfTriangles.Add(oneTriangle);
+           _listOfTriangles.Add(oneTriangle);
+
+            return _listOfTriangles;
         }
 
         public List<Triangle> SortTriangles()
