@@ -28,6 +28,10 @@ namespace _3.TriangleSort.Controller
                 {
                     _firstSide = value;
                 }
+                else
+                {
+                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
+                }
             } 
         }
         public float SecondSide
@@ -41,6 +45,10 @@ namespace _3.TriangleSort.Controller
                 if (value > 0 && value <= Constant.MAX_TRIANGLE_SIDE)
                 {
                     _secondSide = value;
+                }
+                else
+                {
+                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
                 }
             }
         }
@@ -56,6 +64,10 @@ namespace _3.TriangleSort.Controller
                 {
                     _thirdSide = value;
                 }
+                else
+                {
+                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
+                }
             }
         }
         public string Name
@@ -69,6 +81,10 @@ namespace _3.TriangleSort.Controller
                 if (value.Length < Constant.MAX_NAME_LENGTH && value.Length > 0)
                 {
                     _name = value;
+                }
+                else
+                {
+                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
                 }
             }
         }

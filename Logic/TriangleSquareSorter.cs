@@ -4,18 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using _3.TriangleSort.View;
+
 namespace _3.TriangleSort.Logic
 {
     class TriangleSquareSorter 
     {
         public TriangleSquareSorter()
         {
-            listOfTriangles = new List<Triangle>();
+            _listOfTriangles = new List<Triangle>();
         }
 
-        private readonly List<Triangle> listOfTriangles;
+        private readonly List<Triangle> _listOfTriangles;
 
-        public List<Triangle> ListOfTriangles { get { return listOfTriangles; }  }
+        public List<Triangle> ListOfTriangles { get { return _listOfTriangles; }  }
+
         public List<Triangle> SortedTriangleList 
         { 
             get 
@@ -26,22 +29,22 @@ namespace _3.TriangleSort.Logic
 
         public void AddTriangleIntoAList(Triangle oneTriangle)
         {
-            if (oneTriangle == null) //ToDo: Validator
+            if (oneTriangle == null)
             {
-                throw new Exception();
+                throw new ArgumentNullException(Constant.EXCEPTION_NULL_TRIANGLE);
             }
 
-            listOfTriangles.Add(oneTriangle);
+            _listOfTriangles.Add(oneTriangle);
         }
 
         public List<Triangle> SortTriangles()
         {
-            if (listOfTriangles.Count == 0) //ToDo: Validator
+            if (_listOfTriangles.Count == 0) 
             {
-                throw new Exception();
+                throw new ArgumentNullException(Constant.EMPTY_TRIANGLE_LIST);
             }
 
-            List<Triangle> sortedList = listOfTriangles.OrderByDescending(o=>o.Square).ToList();
+            List<Triangle> sortedList = _listOfTriangles.OrderByDescending(o=>o.Square).ToList();
 
             return sortedList;
         }

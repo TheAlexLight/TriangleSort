@@ -26,6 +26,8 @@ namespace _3.TriangleSort.View
         public const string ARGUMENT_NULL_EXCEPTION = "ERROR: Wrong data";
         public const string NAME = "name";
         public const string IS_NOT_TRIANGLE = "Cannot build triangle with this sides, enter new data";
+        public const string EXCEPTION_NULL_TRIANGLE = "Cannot add triangle without data";
+        public const string EMPTY_TRIANGLE_LIST = "There no any triangles int the list";
 
     }
 }

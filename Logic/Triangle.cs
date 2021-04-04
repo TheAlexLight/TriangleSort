@@ -10,32 +10,32 @@ namespace _3.TriangleSort.Logic
     {
         public Triangle(string name, float firstSide, float secondSide, float thirdSide)
         {
-            this.name = name;
-            this.firstSide = firstSide;
-            this.secondSide = secondSide;
-            this.thirdSide = thirdSide;
+            _name = name;
+            _firstSide = firstSide;
+            _secondSide = secondSide;
+            _thirdSide = thirdSide;
 
             CalculateSquare();
         }
  
-        private readonly float firstSide;
-        private readonly float secondSide;
-        private readonly float thirdSide;
+        private readonly float _firstSide;
+        private readonly float _secondSide;
+        private readonly float _thirdSide;
 
-        public float Square { get { return square; } }
-        public string Name { get { return name; } }
+        public float Square { get { return _square; } }
+        public string Name { get { return _name; } }
 
         protected override void CalculateSquare()
         {
             float halfPerimeter = CalculateSemiPerimeter();
 
-            square = (float)Math.Sqrt(halfPerimeter * (halfPerimeter - firstSide) * (halfPerimeter - secondSide)
-                * (halfPerimeter - thirdSide));
+            _square = (float)Math.Sqrt(halfPerimeter * (halfPerimeter - _firstSide) * (halfPerimeter - _secondSide)
+                * (halfPerimeter - _thirdSide));
         }
 
         private float CalculateSemiPerimeter()
         {
-            return (firstSide + secondSide + thirdSide) / 2.0f;
+            return (_firstSide + _secondSide + _thirdSide) / 2.0f;
         }
     }
 }

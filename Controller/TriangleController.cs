@@ -12,32 +12,40 @@ namespace _3.TriangleSort.Controller
 {
     class TriangleController
     {
-        TriangleParameters triangleStartData = new TriangleParameters();
-        readonly ConsolePrinter printer = new ConsolePrinter();
-        readonly Converter converterArgs = new Converter();
-        readonly Validator validArgs = new Validator();
+        private TriangleParameters _triangleStartData = new TriangleParameters();
+        private readonly ConsolePrinter _printer = new ConsolePrinter();
+        private readonly Converter _converterArgs = new Converter();
+        private readonly Validator _validArgs = new Validator();
 
         public TriangleParameters CheckTriangleStartData(string triangleName, string firstSide, string secondSide, string thirdSide)
         {
-            if (!validArgs.CheckStringLength(triangleName))
+            try
             {
-                triangleName = EnterNewName(Constant.NAME);
+                if (!_validArgs.CheckStringLength(triangleName))
+                {
+                    triangleName = EnterNewName(Constant.NAME);
+                }
+
+                _triangleStartData.Name = triangleName;
+
+                _triangleStartData.FirstSide = CheckTriangleSide(firstSide, Constant.FIRST_SIDE);
+                _triangleStartData.SecondSide = CheckTriangleSide(secondSide, Constant.SECOND_SIDE);
+                _triangleStartData.ThirdSide = CheckTriangleSide(thirdSide, Constant.THIRD_SIDE);
+
+                if (!_validArgs.IsTriangle(_triangleStartData.FirstSide, _triangleStartData.SecondSide, _triangleStartData.ThirdSide))
+                {
+                    _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+
+                    _triangleStartData = EnterNewTriangle();
+                }
+
+                return _triangleStartData;
             }
-
-            triangleStartData.Name = triangleName;
-
-            triangleStartData.FirstSide = CheckTriangleSide(firstSide, Constant.FIRST_SIDE);
-            triangleStartData.SecondSide = CheckTriangleSide(secondSide, Constant.SECOND_SIDE);
-            triangleStartData.ThirdSide = CheckTriangleSide(thirdSide, Constant.THIRD_SIDE);
-
-            if (!validArgs.IsTriangle(triangleStartData.FirstSide, triangleStartData.SecondSide, triangleStartData.ThirdSide))
+            catch (Exception ex)
             {
-                printer.WriteLine(Constant.IS_NOT_TRIANGLE);
-
-                triangleStartData = EnterNewTriangle();
+                _printer.WriteLine(string.Format("{0}: {1}",Constant.EXCEPTION_OCCURED, ex.Message));
+                throw;
             }
-            
-            return triangleStartData;
         }
 
         public TriangleParameters EnterNewTriangle()
@@ -46,28 +54,35 @@ namespace _3.TriangleSort.Controller
 
             while (!isTriangle)
             {
-                triangleStartData.Name = EnterNewName(Constant.NAME);
+                _triangleStartData.Name = EnterNewName(Constant.NAME);
 
-                printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.FIRST_SIDE));
-                triangleStartData.FirstSide = CheckTriangleSide(printer.ReadLine(), Constant.FIRST_SIDE);
+                _triangleStartData = PromptToEnterNewSides();
 
-                printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.FIRST_SIDE));
-                triangleStartData.FirstSide = CheckTriangleSide(printer.ReadLine(), Constant.SECOND_SIDE);
-
-                printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.FIRST_SIDE));
-                triangleStartData.FirstSide = CheckTriangleSide(printer.ReadLine(), Constant.THIRD_SIDE);
-
-                if (validArgs.IsTriangle(triangleStartData.FirstSide, triangleStartData.SecondSide, triangleStartData.ThirdSide))
+                if (_validArgs.IsTriangle(_triangleStartData.FirstSide, _triangleStartData.SecondSide, _triangleStartData.ThirdSide))
                 {
                     isTriangle = true;
                 }
                 else
                 {
-                    printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+                    _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
                 }
             }
 
-            return triangleStartData;
+            return _triangleStartData;
+        }
+
+        public TriangleParameters AddOneMoreTriangle(ref bool needToAddNewTriangle)
+        {
+            _printer.WriteLine(Constant.ADD_NEW_TRIANGLE_PROMPT);
+            string checkAnswer = _printer.ReadLine();
+
+            if (!checkAnswer.ToUpper().Equals(Constant.SIMPLE_YES) || checkAnswer.ToUpper().Equals(Constant.YES))
+            {
+                needToAddNewTriangle = false;
+                return new TriangleParameters();
+            }
+
+            return EnterNewTriangle();
         }
 
         private string EnterNewName(string valueName)
@@ -77,12 +92,12 @@ namespace _3.TriangleSort.Controller
 
             while (!successFormat)
             {
-                printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
-                name = printer.ReadLine();
+                _printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
+                name = _printer.ReadLine();
 
-                if (!validArgs.CheckStringLength(name))
+                if (!_validArgs.CheckStringLength(name))
                 {
-                    printer.WriteLine(Constant.WRONG_BOUNDARIES);
+                    _printer.WriteLine(Constant.WRONG_BOUNDARIES);
                 }
                 else
                 {
@@ -102,13 +117,13 @@ namespace _3.TriangleSort.Controller
             {
                 while (!successFormat)
                 {
-                    result = converterArgs.ParseToFloat(side);
+                    result = _converterArgs.ParseToFloat(side);
 
                     if (result != -1)
                     {
-                        if (!validArgs.CheckFloatOnPositive(result, Constant.MAX_TRIANGLE_SIDE))
+                        if (!_validArgs.CheckFloatOnPositive(result, Constant.MAX_TRIANGLE_SIDE))
                         {
-                            printer.WriteLine(Constant.WRONG_BOUNDARIES);
+                            _printer.WriteLine(Constant.WRONG_BOUNDARIES);
                         }
                         else
                         {
@@ -117,19 +132,33 @@ namespace _3.TriangleSort.Controller
                     }
                     else
                     {
-                        printer.WriteLine(Constant.FLOAT_WRONG_TYPE);
-                        printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
+                        _printer.WriteLine(Constant.FLOAT_WRONG_TYPE);
+                        _printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
 
-                        side = printer.ReadLine();
+                        side = _printer.ReadLine();
                     }
                 }
             }
             catch (Exception ex)
             {
-                printer.WriteLine(string.Format("{0}: {1}", Constant.EXCEPTION_OCCURED, ex.Message)); //Complete Exception
+                _printer.WriteLine(string.Format("{0}: {1}", Constant.EXCEPTION_OCCURED, ex.Message)); //Complete Exception
             }
 
             return result;
+        }
+
+        private TriangleParameters PromptToEnterNewSides()
+        {
+            _printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.FIRST_SIDE));
+            _triangleStartData.FirstSide = CheckTriangleSide(_printer.ReadLine(), Constant.FIRST_SIDE);
+
+            _printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.SECOND_SIDE));
+            _triangleStartData.FirstSide = CheckTriangleSide(_printer.ReadLine(), Constant.SECOND_SIDE);
+
+            _printer.Write(string.Format(Constant.ENTER_PROMPT, Constant.THIRD_SIDE));
+            _triangleStartData.FirstSide = CheckTriangleSide(_printer.ReadLine(), Constant.THIRD_SIDE);
+
+            return _triangleStartData;
         }
     }
 }

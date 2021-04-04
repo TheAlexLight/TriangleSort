@@ -8,8 +8,8 @@ namespace _3.TriangleSort.Logic
 {
    public abstract class Shape
     {
-        protected string name;
-        protected float square;
+        protected string _name;
+        protected float _square;
 
         protected abstract void CalculateSquare();
     }

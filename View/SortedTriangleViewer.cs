@@ -12,14 +12,14 @@ namespace _3.TriangleSort.View
     {
         public SortedTriangleViewer(TriangleSquareSorter sortedTriangles)
         {
-            this.sortedTriangles = sortedTriangles;
+            _sortedTriangles = sortedTriangles;
         }
 
-        readonly TriangleSquareSorter sortedTriangles;
+        private readonly TriangleSquareSorter _sortedTriangles;
 
         public void ShowSquares()
         {
-            foreach (var triangle in sortedTriangles.SortedTriangleList)
+            foreach (var triangle in _sortedTriangles.SortedTriangleList)
             {
                 string fullTriangleMessage = string.Format("[{0}]: {1} cm",triangle.Name, triangle.Square);
                 Console.WriteLine(fullTriangleMessage);

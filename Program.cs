@@ -23,33 +23,24 @@ namespace _3.TriangleSort
                     throw new ArgumentException();
                 }
 
-                TriangleController controller = new TriangleController();
-                TriangleParameters parameters;
+                TriangleController _controller = new TriangleController();
+                TriangleParameters _parameters;
 
-                parameters = controller.CheckTriangleStartData(args[0], args[1], args[2], args[3]);
+                _parameters = _controller.CheckTriangleStartData(args[0], args[1], args[2], args[3]);
 
-                //Triangle secondTriangle = new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide);
 
                 TriangleSquareSorter sorterOfTriangles = new TriangleSquareSorter();
 
-                sorterOfTriangles.AddTriangleIntoAList(new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide));
+                sorterOfTriangles.AddTriangleIntoAList(new Triangle(_parameters.Name, _parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide));
 
-                bool addOneMoreTriangle = true;
+                bool needOneMoreTriangle = true;
                 ConsolePrinter printer = new ConsolePrinter();
 
-                while (addOneMoreTriangle)
+
+                while (needOneMoreTriangle)
                 {
-                    printer.WriteLine(Constant.ADD_NEW_TRIANGLE_PROMPT);
-                    string checkAnswer = printer.ReadLine();
-
-                    if (!checkAnswer.ToUpper().Equals(Constant.SIMPLE_YES) || checkAnswer.ToUpper().Equals(Constant.YES))
-                    {
-                        addOneMoreTriangle = false;
-                        continue;
-                    }
-
-                    parameters = controller.EnterNewTriangle();
-                    sorterOfTriangles.AddTriangleIntoAList(new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide));
+                    _parameters = _controller.AddOneMoreTriangle(ref needOneMoreTriangle);
+                    sorterOfTriangles.AddTriangleIntoAList(new Triangle(_parameters.Name, _parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide));
                 }
 
                 SortedTriangleViewer showSortedTriangles = new SortedTriangleViewer(sorterOfTriangles);
