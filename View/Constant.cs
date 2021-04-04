@@ -8,6 +8,9 @@ namespace _3.TriangleSort.View
 {
     static class Constant
     {
+        public static int MAX_TRIANGLE_SIDE = 1000000;
+        public static int MAX_NAME_LENGTH = 50;
+
         public const string CHECK_ARGS_PROMPT = @"Do you want to check arguments?(Write """"y"""" or """"yes"""" to accept): ";
         public const string ADD_NEW_TRIANGLE_PROMPT = @"Do you want to add one more triangle?(Write """"y"""" or """"yes"""" to accept): ";
         public const string SIMPLE_YES = "Y";

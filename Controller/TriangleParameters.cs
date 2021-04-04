@@ -1,34 +1,32 @@
-﻿using _3.TriangleSort.Validation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using _3.TriangleSort.Validation;
+using _3.TriangleSort.View;
+
 namespace _3.TriangleSort.Controller
 {
     struct TriangleParameters
     {
-        public static int MAX_TRIANGLE_SIDE = 1000000;
-        public static int MAX_NAME_LENGTH = 50;
-
-
-       private string name;
-       private float firstSide;
-       private float secondSide;
-       private float thirdSide;
+       private string _name;
+       private float _firstSide;
+       private float _secondSide;
+       private float _thirdSide;
 
         public float FirstSide 
         {
             get 
             {
-                return firstSide;
+                return _firstSide;
             } 
             set
             {
-                if (value > 0 && value <= MAX_TRIANGLE_SIDE)
+                if (value > 0 && value <= Constant.MAX_TRIANGLE_SIDE)
                 {
-                    firstSide = value;
+                    _firstSide = value;
                 }
             } 
         }
@@ -36,13 +34,13 @@ namespace _3.TriangleSort.Controller
         {
             get
             {
-                return secondSide;
+                return _secondSide;
             }
             set
             {
-                if (value > 0 && value <= MAX_TRIANGLE_SIDE)
+                if (value > 0 && value <= Constant.MAX_TRIANGLE_SIDE)
                 {
-                    secondSide = value;
+                    _secondSide = value;
                 }
             }
         }
@@ -50,13 +48,13 @@ namespace _3.TriangleSort.Controller
         {
             get
             {
-                return thirdSide;
+                return _thirdSide;
             }
             set
             {
-                if (value > 0 && value <= MAX_TRIANGLE_SIDE)
+                if (value > 0 && value <= Constant.MAX_TRIANGLE_SIDE)
                 {
-                    thirdSide = value;
+                    _thirdSide = value;
                 }
             }
         }
@@ -64,13 +62,13 @@ namespace _3.TriangleSort.Controller
         {
             get
             {
-                return name;
+                return _name;
             }
             set
             {
-                if (value.Length < MAX_NAME_LENGTH && value.Length > 0)
+                if (value.Length < Constant.MAX_NAME_LENGTH && value.Length > 0)
                 {
-                    name = value;
+                    _name = value;
                 }
             }
         }
