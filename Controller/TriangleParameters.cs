@@ -11,82 +11,9 @@ namespace _3.TriangleSort.Controller
 {
     struct TriangleParameters
     {
-       private string _name;
-       private float _firstSide;
-       private float _secondSide;
-       private float _thirdSide;
-
-        public float FirstSide 
-        {
-            get 
-            {
-                return _firstSide;
-            } 
-            set
-            {
-                if (value > 0 && value <= Constant.MAX_TRIANGLE_SIDE)
-                {
-                    _firstSide = value;
-                }
-                else
-                {
-                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
-                }
-            } 
-        }
-        public float SecondSide
-        {
-            get
-            {
-                return _secondSide;
-            }
-            set
-            {
-                if (value > 0 && value <= Constant.MAX_TRIANGLE_SIDE)
-                {
-                    _secondSide = value;
-                }
-                else
-                {
-                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
-                }
-            }
-        }
-        public float ThirdSide
-        {
-            get
-            {
-                return _thirdSide;
-            }
-            set
-            {
-                if (value > 0 && value <= Constant.MAX_TRIANGLE_SIDE)
-                {
-                    _thirdSide = value;
-                }
-                else
-                {
-                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
-                }
-            }
-        }
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (value.Length < Constant.MAX_NAME_LENGTH && value.Length > 0)
-                {
-                    _name = value;
-                }
-                else
-                {
-                    throw new ArgumentException(Constant.WRONG_BOUNDARIES);
-                }
-            }
-        }
+        public float FirstSide { get; set; } 
+        public float SecondSide { get; set; }
+        public float ThirdSide { get; set; }
+        public string Name { get; set; }
     }
 }

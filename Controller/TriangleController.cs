@@ -45,67 +45,6 @@ namespace _3.TriangleSort.Controller
             showSortedTriangles.ShowSquares();
         }
 
-        public TriangleParameters CheckTriangleStartData(string triangleName, string firstSide, string secondSide, string thirdSide)
-        {
-            try
-            {
-                if (!_validArgs.CheckStringLength(triangleName))
-                {
-                    triangleName = EnterNewName(Constant.NAME);
-                }
-
-                TriangleParameters _parameters = new TriangleParameters
-                {
-                    Name = triangleName,
-
-                    FirstSide = CheckTriangleSide(firstSide, Constant.FIRST_SIDE),
-                    SecondSide = CheckTriangleSide(secondSide, Constant.SECOND_SIDE),
-                    ThirdSide = CheckTriangleSide(thirdSide, Constant.THIRD_SIDE)
-                };
-
-                if (!_validArgs.IsTriangle(_parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide))
-                {
-                    _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
-
-                    _parameters = EnterNewTriangle();
-                }
-
-                return _parameters;
-            }
-            catch (Exception ex)
-            {
-                _printer.WriteLine(string.Format("{0}: {1}",Constant.EXCEPTION_OCCURED, ex.Message));
-                throw;
-            }
-        }
-
-        public TriangleParameters EnterNewTriangle()
-        {
-            bool isTriangle = false;
-
-            TriangleParameters _parameters = new TriangleParameters();
-
-            while (!isTriangle)
-            {
-                string triangleName = EnterNewName(Constant.NAME);
-
-                _parameters = PromptToEnterNewSides();
-
-                _parameters.Name = triangleName;
-
-                if (_validArgs.IsTriangle(_parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide))
-                {
-                    isTriangle = true;
-                }
-                else
-                {
-                    _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
-                }
-            }
-
-            return _parameters;
-        }
-
         public List<Triangle> AddTriangleIntoAList(TriangleSquareSorter sorterOfTriangles, TriangleParameters parameters)
         {
             return sorterOfTriangles.AddTriangleIntoAList(new Triangle(parameters.Name, parameters.FirstSide, parameters.SecondSide, parameters.ThirdSide));
@@ -123,29 +62,6 @@ namespace _3.TriangleSort.Controller
             }
 
             return EnterNewTriangle();
-        }
-
-        private string EnterNewName(string valueName)
-        {
-            bool successFormat = false;
-            string name = "";
-
-            while (!successFormat)
-            {
-                _printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
-                name = _printer.ReadLine();
-
-                if (!_validArgs.CheckStringLength(name))
-                {
-                    _printer.WriteLine(Constant.WRONG_BOUNDARIES);
-                }
-                else
-                {
-                    successFormat = true;
-                }
-            }
-
-            return name;
         }
 
         private float CheckTriangleSide(string side, string valueName)
@@ -190,6 +106,40 @@ namespace _3.TriangleSort.Controller
             return result;
         }
 
+        public TriangleParameters CheckTriangleStartData(string triangleName, string firstSide, string secondSide, string thirdSide)
+        {
+            try
+            {
+                if (!_validArgs.CheckStringLength(triangleName))
+                {
+                    triangleName = EnterNewName(Constant.NAME);
+                }
+
+                TriangleParameters _parameters = new TriangleParameters
+                {
+                    Name = triangleName,
+
+                    FirstSide = CheckTriangleSide(firstSide, Constant.FIRST_SIDE),
+                    SecondSide = CheckTriangleSide(secondSide, Constant.SECOND_SIDE),
+                    ThirdSide = CheckTriangleSide(thirdSide, Constant.THIRD_SIDE)
+                };
+
+                if (!_validArgs.IsTriangle(_parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide))
+                {
+                    _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+
+                    _parameters = EnterNewTriangle();
+                }
+
+                return _parameters;
+            }
+            catch (Exception ex)
+            {
+                _printer.WriteLine(string.Format("{0}: {1}", Constant.EXCEPTION_OCCURED, ex.Message));
+                throw;
+            }
+        }
+
         private TriangleParameters PromptToEnterNewSides()
         {
             TriangleParameters parameters = new TriangleParameters();
@@ -204,6 +154,56 @@ namespace _3.TriangleSort.Controller
             parameters.ThirdSide = CheckTriangleSide(_printer.ReadLine(), Constant.THIRD_SIDE);
 
             return parameters;
+        }
+
+        private string EnterNewName(string valueName)
+        {
+            bool successFormat = false;
+            string name = "";
+
+            while (!successFormat)
+            {
+                _printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
+                name = _printer.ReadLine();
+
+                if (!_validArgs.CheckStringLength(name))
+                {
+                    _printer.WriteLine(Constant.WRONG_BOUNDARIES);
+                }
+                else
+                {
+                    successFormat = true;
+                }
+            }
+
+            return name;
+        }
+
+        public TriangleParameters EnterNewTriangle()
+        {
+            bool isTriangle = false;
+
+            TriangleParameters _parameters = new TriangleParameters();
+
+            while (!isTriangle)
+            {
+                string triangleName = EnterNewName(Constant.NAME);
+
+                _parameters = PromptToEnterNewSides();
+
+                _parameters.Name = triangleName;
+
+                if (_validArgs.IsTriangle(_parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide))
+                {
+                    isTriangle = true;
+                }
+                else
+                {
+                    _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+                }
+            }
+
+            return _parameters;
         }
     }
 }

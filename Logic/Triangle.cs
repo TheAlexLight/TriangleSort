@@ -22,8 +22,8 @@ namespace _3.TriangleSort.Logic
         private readonly float _secondSide;
         private readonly float _thirdSide;
 
-        public float Square { get { return _square; } }
-        public string Name { get { return _name; } }
+        public float Square => _square;
+        public string Name => _name;
 
         protected override void CalculateSquare()
         {

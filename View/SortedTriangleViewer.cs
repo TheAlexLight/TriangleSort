@@ -19,7 +19,7 @@ namespace _3.TriangleSort.View
 
         public void ShowSquares()
         {
-            foreach (var triangle in _sortedTriangles.SortedTriangleList)
+            foreach (var triangle in _sortedTriangles.SortTriangles())
             {
                 string fullTriangleMessage = string.Format("[{0}]: {1} cm",triangle.Name, triangle.Square);
                 Console.WriteLine(fullTriangleMessage);

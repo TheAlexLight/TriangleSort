@@ -17,16 +17,6 @@ namespace _3.TriangleSort.Logic
 
         private readonly List<Triangle> _listOfTriangles;
 
-        public List<Triangle> ListOfTriangles { get { return _listOfTriangles; }  }
-
-        public List<Triangle> SortedTriangleList 
-        { 
-            get 
-            {
-                return SortTriangles();
-            }  
-        }
-
         public List<Triangle> AddTriangleIntoAList(Triangle oneTriangle)
         {
             if (oneTriangle == null)
@@ -46,9 +36,8 @@ namespace _3.TriangleSort.Logic
                 throw new ArgumentNullException(Constant.EMPTY_TRIANGLE_LIST);
             }
 
-            List<Triangle> sortedList = _listOfTriangles.OrderByDescending(o=>o.Square).ToList();
+             return _listOfTriangles.OrderByDescending(o=>o.Square).ToList();
 
-            return sortedList;
         }
     }
 }

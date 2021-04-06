@@ -12,7 +12,6 @@ namespace _3.TriangleSort.Validation
 {
     class Validator
     {
-
         public bool IsTriangle(float firstSide, float secondSide, float thirdSide)
         {
             return ((firstSide + secondSide > thirdSide)
