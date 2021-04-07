@@ -20,9 +20,9 @@ namespace _3.TriangleSort.View
         public const string FLOAT_WRONG_TYPE = "Type of data should be float, try again";
         public const string ENTER_PROMPT = "Enter your triangle {0}: ";
         public const string EXCEPTION_OCCURED = "ERROR occured";
-        public const string FIRST_SIDE = "Side 1";
-        public const string SECOND_SIDE = "Side 2";
-        public const string THIRD_SIDE = "Side 3";
+        //public const string FIRST_SIDE = "Side 1";
+        //public const string SECOND_SIDE = "Side 2";
+        //public const string THIRD_SIDE = "Side 3";
         public const string ARGUMENT_NULL_EXCEPTION = "ERROR: Wrong data";
         public const string NAME = "name";
         public const string IS_NOT_TRIANGLE = "Cannot build triangle with this sides, enter new data";
