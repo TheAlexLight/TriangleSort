@@ -98,7 +98,11 @@ namespace _3.TriangleSort.Controller
             {
                 if (!_validArgs.CheckStringLength(triangleName))
                 {
-                    triangleName = EnterNewName(Constant.NAME);
+                    _printer.WriteLine(Constant.WRONG_BOUNDARIES);
+                    _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT, 
+                            Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT, Constant.FOURTH_ARGUMENT);
+
+                    Environment.Exit(-1);
                 }
 
                 TriangleParameters _parameters = new TriangleParameters
@@ -113,8 +117,10 @@ namespace _3.TriangleSort.Controller
                 if (!_validArgs.IsTriangle(_parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide))
                 {
                     _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+                    _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT,
+                            Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT, Constant.FOURTH_ARGUMENT);
 
-                    _parameters = EnterNewTriangle();
+                    Environment.Exit(-1);
                 }
 
                 return _parameters;
@@ -126,32 +132,21 @@ namespace _3.TriangleSort.Controller
             }
         }
 
-        private string EnterNewName(string valueName)
-        {
-            bool successFormat = false;
-            string name = "";
-
-            while (!successFormat)
-            {
-                _printer.Write(string.Format(Constant.ENTER_PROMPT, valueName));
-                name = _printer.ReadLine();
-
-                if (!_validArgs.CheckStringLength(name))
-                {
-                    _printer.WriteLine(Constant.WRONG_BOUNDARIES);
-                }
-                else
-                {
-                    successFormat = true;
-                }
-            }
-
-            return name;
-        }
-
         public TriangleParameters EnterNewTriangle()
         {
-            string[] newArgs = _printer.ReadLine().Split(','); //TODO: if < args amount => exit
+            _printer.WriteLine(Constant.ENTER_PROMPT);
+
+            string[] newArgs = _printer.ReadLine().Split(',');
+
+            if (newArgs.Length != 4)
+            {
+                _printer.WriteLine(Constant.WRONG_NEW_ARGUMENTS);
+
+                _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT,
+                           Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT, Constant.FOURTH_ARGUMENT);
+
+                Environment.Exit(-1);
+            }
 
             newArgs = RemoveSpaces(newArgs);
             newArgs = RemoveTabulation(newArgs);
@@ -160,22 +155,42 @@ namespace _3.TriangleSort.Controller
             {
                 if (newArgs[i] == "")
                 {
-                    Console.WriteLine("Wrong"); //TODO:
+                    _printer.WriteLine(Constant.WRONG_NEW_ARGUMENTS);
+
+                    _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT,
+                               Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT, Constant.FOURTH_ARGUMENT);
+
+                    Environment.Exit(-1);
                 }
             }
+            TriangleParameters _parameters;
 
-            TriangleParameters _parameters = new TriangleParameters
+            _parameters = new TriangleParameters()
             {
-                Name = newArgs[0], //TODO: Check
-
                 FirstSide = CheckTriangleSide(newArgs[1]),
                 SecondSide = CheckTriangleSide(newArgs[2]),
                 ThirdSide = CheckTriangleSide(newArgs[3])
             };
 
+            if (!_validArgs.CheckStringLength(newArgs[0]))
+            {
+                _printer.WriteLine(Constant.WRONG_BOUNDARIES);
+                _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT,
+                        Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT, Constant.FOURTH_ARGUMENT);
+
+                Environment.Exit(-1);
+            }
+
+            _parameters.Name = newArgs[0];
+
             if (!_validArgs.IsTriangle(_parameters.FirstSide, _parameters.SecondSide, _parameters.ThirdSide))
             {
-                _printer.WriteLine(Constant.IS_NOT_TRIANGLE); //TODO: Exit
+                _printer.WriteLine(Constant.IS_NOT_TRIANGLE);
+
+                _printer.ShowInstruction(Constant.INSTRUCTION, Constant.FIRST_ARGUMENT,
+                       Constant.SECOND_ARGUMENT, Constant.THIRD_ARGUMENT, Constant.FOURTH_ARGUMENT);
+
+                Environment.Exit(-1);
             }
 
             return _parameters;
